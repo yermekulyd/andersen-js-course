@@ -11,13 +11,30 @@ let btn = document.getElementById('btn');
 let binary = document.querySelector('.binary');
 let decimal = document.querySelector('.decimal');
 
-function getNumber () {
-    let num = parseInt(prompt('Enter your number'));
+function getNumber() {
+    let input = prompt('Enter a non-negative integer');
+    let num = parseInt(input, 10);
+
+    if (isNaN(num)) {
+        alert('Please enter a valid number.');
+        return;
+    }
+
+    if (num < 0) {
+        alert('Please enter a non-negative number.');
+        return;
+    }
+
     decimal.textContent = num;
-    
+
+    if (num === 0) {
+        binary.textContent = '0';
+        return;
+    }
+
     let res = '';
 
-    while(num > 0) {
+    while (num > 0) {
         res = (num % 2) + res;
         num = Math.floor(num / 2);
     }
@@ -29,4 +46,4 @@ getNumber();
 
 btn.addEventListener('click', function () {
     getNumber();
-})
+});
