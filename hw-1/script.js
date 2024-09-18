@@ -7,43 +7,28 @@ console.log('Your test is an' + null + 'ed');
 
 // transform a number into a binary form
 
-let btn = document.getElementById('btn');
-let binary = document.querySelector('.binary');
-let decimal = document.querySelector('.decimal');
+const BTN = document.getElementById('btn');
+const BINARY = document.querySelector('.binary');
+const DECIMAL = document.querySelector('.decimal');
 
 function getNumber() {
-    let input = prompt('Enter a non-negative integer');
-    let num = parseInt(input, 10);
+    const input = prompt('Enter a non-negative integer');
 
-    if (isNaN(num)) {
-        alert('Please enter a valid number.');
+    if (input === null || input.trim() === '') {
+        return alert('Please enter a valid non-negative integer')
+    }
+
+    const num = Number(input);
+
+    if (isNaN(num) || num < 0) {
+        alert('Please enter a valid non-negative integer');
         return;
     }
 
-    if (num < 0) {
-        alert('Please enter a non-negative number.');
-        return;
-    }
-
-    decimal.textContent = num;
-
-    if (num === 0) {
-        binary.textContent = '0';
-        return;
-    }
-
-    let res = '';
-
-    while (num > 0) {
-        res = (num % 2) + res;
-        num = Math.floor(num / 2);
-    }
-
-    binary.textContent = res;
+    DECIMAL.textContent = num;
+    BINARY.textContent = num.toString(2);
 }
 
-getNumber();
+// getNumber();
 
-btn.addEventListener('click', function () {
-    getNumber();
-});
+BTN.addEventListener('click', getNumber);
